@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
 
 import {ApolloProvider} from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
 import Header from './Modulos/Header';
+import Repositories from './Modulos/ListRepositories';
 
 // --------------------- Apollo Client ---------------------//
 const client = new ApolloClient({
@@ -41,34 +42,68 @@ export default function App() {
   let confirmedOutput;
 
   if(confirmed){
-    confirmedOutput = <Text> Búsqueda: {enteredValue}</Text>
+    confirmedOutput = <Text>Búsqueda: {enteredValue}</Text>
+    return (
+      <TouchableWithoutFeedback
+        onPress={()=>{
+          Keyboard.dismiss();
+        }}
+      >
+        <View style={styles.container}>
+          <Header title="Github Repositories"/>
+          <View style = {styles.inputContainer}>
+            <TextInput
+              placeholder = "Search github user"
+              style={styles.input}
+              onChangeText = {userInputHandler}
+              value={enteredUser} />
+            <Button color='#7d3c98' title="Search" onPress={confirmInputHandler}/>
+          </View>
+          <View style = {styles.showConfirmation}>
+            {confirmedOutput}
+          </View>
+          <View onStartShouldSetResponder={() => true}>
+            <ScrollView>
+              <ApolloProvider client={client}>
+                <Repositories props={enteredValue}/>
+              </ApolloProvider>
+            </ScrollView>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    );
   }
-
-  return (
-    <TouchableWithoutFeedback
-      onPress={()=>{
-        Keyboard.dismiss();
-      }}
-    >
-      <View style={styles.container}>
-        <Header title="Github Repositories"/>
-        <View style = {styles.inputContainer}>
-          <TextInput
-            placeholder = "Search github user"
-            style={styles.input}
-            onChangeText = {userInputHandler}
-            value={enteredUser} />
-          <Button color='#7d3c98' title="Search" onPress={confirmInputHandler}/>
+  else{
+    return (
+      <TouchableWithoutFeedback
+        onPress={()=>{
+          Keyboard.dismiss();
+        }}
+      >
+        <View style={styles.container}>
+          <Header title="Github Repositories"/>
+          <View style = {styles.inputContainer}>
+            <TextInput
+              placeholder = "Search github user"
+              style={styles.input}
+              onChangeText = {userInputHandler}
+              value={enteredUser} />
+            <Button color='#7d3c98' title="Search" onPress={confirmInputHandler}/>
+          </View>
+          <View style = {styles.showConfirmation}>
+            {confirmedOutput}
+          </View>
+          <View onStartShouldSetResponder={() => true}>
+            <ScrollView>
+              <ApolloProvider client={client}>
+                <Text style = {styles.showConfirmation}> No hay búsquedas</Text>
+              </ApolloProvider>
+            </ScrollView>
+          </View>
         </View>
-        <View style = {styles.inputContainer}>
-          {confirmedOutput}
-        </View>
-          <ApolloProvider client={client}>
-              <Text>Apollo Client</Text>
-          </ApolloProvider>
-      </View>
-    </TouchableWithoutFeedback>
-  );
+      </TouchableWithoutFeedback>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -91,5 +126,15 @@ const styles = StyleSheet.create({
     borderColor: '#7d3c98',
     borderWidth: 0.4,
     padding: 10
-  }
+  },
+  screen: {
+    //flex: 1,
+    padding: 12
+    //alignItems: 'center'
+  },
+  showConfirmation: {
+    marginLeft:10,
+    marginRight:10,
+    marginBottom:5
+  },
 });
