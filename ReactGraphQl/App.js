@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, TouchableWithoutFeedback, Keyboard, ScrollView, FlatList} from 'react-native';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
 import {ApolloProvider} from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
 import Header from './Modulos/Header';
 import Repositories from './Modulos/ListRepositories';
-import UsersRepo from './Modulos/ListUsersFromRepo';
+import CollaboratorsFromRepo from './Modulos/ListUsersFromRepo';
 
 // --------------------- Apollo Client ---------------------//
 const client = new ApolloClient({
@@ -15,13 +17,17 @@ const client = new ApolloClient({
     //const token = await AsyncStorage.getItem("token");
     operation.setContext({
       headers:{
-        authorization: `token API_KEY`
+        authorization: `token 9e2d9daf850cec462c52367a4657705b32358506`
       }
     });
   }
 });
 
-export default function App() {
+// -------------------------- App ----------------------------//
+//export default function App() {
+//class HomeScreen extends React.Component{
+  //render(){
+function HomeScreen () {
   const [enteredUser, setEnteredUser] = useState('');
   const [enteredValue, setEnteredValue] = useState('');
   const [confirmed, setConfirmed] = useState(false);
@@ -70,7 +76,8 @@ export default function App() {
           </View>
         </View>
       </TouchableWithoutFeedback>
-      //<UsersRepo repo={enteredValue}/>
+      //<Repositories props={enteredValue} navigation={navigator}/>
+      //<CollaboratorsFromRepo repo={enteredValue}/>
     );
   }
   else{
@@ -102,7 +109,23 @@ export default function App() {
       </TouchableWithoutFeedback>
     );
   }
+//}
 }
+
+const AppNavigator = createStackNavigator({
+    Home: {
+      screen: HomeScreen,
+    },
+    RepositoriesScreen: {
+      screen: Repositories,
+    },
+    CollaboratorsScreen:{
+      screen: CollaboratorsFromRepo,
+    }
+  }
+);
+
+const App = createAppContainer(AppNavigator);
 
 const styles = StyleSheet.create({
   container: {
@@ -139,3 +162,5 @@ const styles = StyleSheet.create({
     marginBottom:4
   },
 });
+
+export default App;
