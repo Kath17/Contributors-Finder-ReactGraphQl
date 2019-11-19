@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, TouchableWithoutFeedback, Keyboard, ScrollView, FlatList} from 'react-native';
 
 import {ApolloProvider} from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
 import Header from './Modulos/Header';
 import Repositories from './Modulos/ListRepositories';
+import UsersRepo from './Modulos/ListUsersFromRepo';
 
 // --------------------- Apollo Client ---------------------//
 const client = new ApolloClient({
@@ -63,14 +64,13 @@ export default function App() {
             {confirmedOutput}
           </View>
           <View onStartShouldSetResponder={() => true}>
-            <ScrollView>
-              <ApolloProvider client={client}>
-                <Repositories props={enteredValue}/>
-              </ApolloProvider>
-            </ScrollView>
+            <ApolloProvider client={client}>
+              <Repositories props={enteredValue}/>
+            </ApolloProvider>
           </View>
         </View>
       </TouchableWithoutFeedback>
+      //<UsersRepo repo={enteredValue}/>
     );
   }
   else{
@@ -94,11 +94,9 @@ export default function App() {
             {confirmedOutput}
           </View>
           <View onStartShouldSetResponder={() => true}>
-            <ScrollView>
-              <ApolloProvider client={client}>
-                <Text style = {styles.showConfirmation}> No hay búsquedas</Text>
-              </ApolloProvider>
-            </ScrollView>
+            <ApolloProvider client={client}>
+              <Text style = {styles.showConfirmation}> No hay búsquedas</Text>
+            </ApolloProvider>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -108,14 +106,17 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
     //marginTop:40,
-    //backgroundColor: '#fff',
+    backgroundColor: '#fff',
     //alignItems: 'center',
     //justifyContent: 'center',
   },
   inputContainer: {
-    padding:10,
+    marginLeft:14,
+    marginRight:14,
+    marginTop:10,
+    marginBottom:4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -133,8 +134,8 @@ const styles = StyleSheet.create({
     //alignItems: 'center'
   },
   showConfirmation: {
-    marginLeft:10,
-    marginRight:10,
-    marginBottom:5
+    marginLeft:14,
+    marginRight:14,
+    marginBottom:4
   },
 });
