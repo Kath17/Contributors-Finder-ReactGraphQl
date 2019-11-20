@@ -46,7 +46,9 @@ function Repositories ({props}) {
             renderItem={({item}) => (
                 <TouchableOpacity 
                     style={styles.touchable}
-                    onPress={()=> {navigation.navigate('CollaboratorsScreen',{repo:item.node.name})}} >
+                    //onPress={()=> {navigation.navigate('CollaboratorsScreen'), navigation.setParams({repo:item.node.name, user:props})}} >
+                    //onPress={()=> {navigation.navigate('CollaboratorsScreen', {repo:item.node.name, user:props})}} >
+                    onPress={()=>{ToastAndroid.show(item.node.name,ToastAndroid.SHORT) }}>
                     <ListItem 
                         title = {item.node.name}
                         subtitle = {item.node.description} 

@@ -9,6 +9,7 @@ import ApolloClient from 'apollo-boost';
 import Header from './Modulos/Header';
 import Repositories from './Modulos/ListRepositories';
 import CollaboratorsFromRepo from './Modulos/ListUsersFromRepo';
+import CollaboratorsFromRepo2 from './Modulos/ListUsersFromRepo2';
 
 // --------------------- Apollo Client ---------------------//
 const client = new ApolloClient({
@@ -17,7 +18,7 @@ const client = new ApolloClient({
     //const token = await AsyncStorage.getItem("token");
     operation.setContext({
       headers:{
-        authorization: `token 9e2d9daf850cec462c52367a4657705b32358506`
+        authorization: `token API_KEY`
       }
     });
   }
@@ -51,13 +52,13 @@ function HomeScreen () {
   if(confirmed){
     confirmedOutput = <Text>Búsqueda: {enteredValue}</Text>
     return (
+      //<Header title="Github Repositories"/>
       <TouchableWithoutFeedback
         onPress={()=>{
           Keyboard.dismiss();
         }}
       >
         <View style={styles.container}>
-          <Header title="Github Repositories"/>
           <View style = {styles.inputContainer}>
             <TextInput
               placeholder = "Search github user"
@@ -76,19 +77,20 @@ function HomeScreen () {
           </View>
         </View>
       </TouchableWithoutFeedback>
-      //<Repositories props={enteredValue} navigation={navigator}/>
+      //<CollaboratorsFromRepo2 repo={enteredValue}/>
       //<CollaboratorsFromRepo repo={enteredValue}/>
+      //<Repositories props={enteredValue} navigation={navigator}/>
     );
   }
   else{
     return (
+      //<Header title="Github Repositories"/>
       <TouchableWithoutFeedback
         onPress={()=>{
           Keyboard.dismiss();
         }}
       >
         <View style={styles.container}>
-          <Header title="Github Repositories"/>
           <View style = {styles.inputContainer}>
             <TextInput
               placeholder = "Search github user"
@@ -102,7 +104,7 @@ function HomeScreen () {
           </View>
           <View onStartShouldSetResponder={() => true}>
             <ApolloProvider client={client}>
-              <Text style = {styles.showConfirmation}> No hay búsquedas</Text>
+              <Text style = {styles.showConfirmation}>No hay búsquedas</Text>
             </ApolloProvider>
           </View>
         </View>
@@ -115,12 +117,20 @@ function HomeScreen () {
 const AppNavigator = createStackNavigator({
     Home: {
       screen: HomeScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: `Github Repositories`,
+        headerTintColor: '#7d3c98'
+      })
     },
     RepositoriesScreen: {
       screen: Repositories,
     },
     CollaboratorsScreen:{
       screen: CollaboratorsFromRepo,
+      navigationOptions: ({ navigation }) => ({
+        title: `Collaborators`,
+        headerTintColor: '#7d3c98'
+      })
     }
   }
 );
