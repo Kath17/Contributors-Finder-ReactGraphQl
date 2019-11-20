@@ -14,17 +14,17 @@ How to add a github api token:
 - Arquitecture:
 
 	- Arquitecture of react native
-	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/react_native_arq.png" width="70">
+	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/react_native_arq.png" width="500">
 
 	- Arquitecture of Apollo Client using GraphQl
-	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/apollo_graphql.png" width="70">
+	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/apollo_graphql.png" width="500">
 
 - Screens:
 
 	- Repositories
-	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/Repositories.jpg" width="40">
+	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/Repositories.jpg" width="400">
 
 	- Collaborators of repository
-	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/Collaborators.jpg" width="40">
+	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/Collaborators.jpg" width="400">
 
 
