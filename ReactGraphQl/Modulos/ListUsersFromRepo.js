@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet,FlatList, ActivityIndicator,TouchableOpacity,ToastAndroid} from 'react-native';
+import { ListItem } from 'react-native-elements';
 
 import gpl from "graphql-tag";
 
@@ -11,7 +12,7 @@ const client = new ApolloClient({
       //const token = await AsyncStorage.getItem("token");
       operation.setContext({
         headers:{
-          authorization: `token API_KEY`
+          authorization: `token 9e2d9daf850cec462c52367a4657705b32358506`
         }
       });
     }
@@ -49,16 +50,21 @@ const GET_USERS = {query:gpl`
 
 function CollaboratorsFromRepo(repo,user) {
     //const {loading, error, data} = useQuery(GET_USERS,{
-    console.log("Repositorio ",repo.navigation.state.params.repo);
-    console.log("Usuario ",repo.navigation.state.params.user);
-    var repo1 = repo.navigation.state.params.repo;
-    var user1 = repo.navigation.state.params.user;
+    console.log("Repositorio ",repo);
+    console.log("Usuario ",user);
+    //var repo1 = repo.navigation.state.params.repo;
+    //var user1 = repo.navigation.state.params.user;
 
     const {loading, error, data} = client.query(GET_USERS,{
-      variables: {repo, user},
+      variables: {repo:"GatosyPerros", user:"Kath17"},
     }).then(data => console.log(data))
     .catch(error => console.error(error));
 
+    if (loading) return <Text style={styles.screen}>Loading ...</Text>;
+    if (error) return <Text style={styles.screen}>Error </Text>;
+    return <Text >{data} </Text>;
+
+    /*
     if (loading) return <View style={styles.loading}><ActivityIndicator size="large" color="#aea8b0" animating/></View>
     if (error) return <Text style={styles.screen}>Error </Text>;
     return <FlatList 
@@ -111,6 +117,7 @@ function CollaboratorsFromRepo(repo,user) {
                 })
             }}
         />;
+        */
   }
 
 const styles  = StyleSheet.create({

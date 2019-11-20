@@ -47,8 +47,8 @@ function Repositories ({props}) {
                 <TouchableOpacity 
                     style={styles.touchable}
                     //onPress={()=> {navigation.navigate('CollaboratorsScreen'), navigation.setParams({repo:item.node.name, user:props})}} >
-                    //onPress={()=> {navigation.navigate('CollaboratorsScreen', {repo:item.node.name, user:props})}} >
-                    onPress={()=>{ToastAndroid.show(item.node.name,ToastAndroid.SHORT) }}>
+                    //onPress={()=>{ToastAndroid.show(item.node.name,ToastAndroid.SHORT) }}>
+                    onPress={()=> {navigation.navigate('CollaboratorsScreen', {repo:item.node.name, user:props})}} >
                     <ListItem 
                         title = {item.node.name}
                         subtitle = {item.node.description} 
