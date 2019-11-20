@@ -12,7 +12,7 @@ const client = new ApolloClient({
       //const token = await AsyncStorage.getItem("token");
       operation.setContext({
         headers:{
-          authorization: `token 9e2d9daf850cec462c52367a4657705b32358506`
+          authorization: `token API_KEY`
         }
       });
     }
@@ -50,13 +50,13 @@ const GET_USERS = {query:gpl`
 
 function CollaboratorsFromRepo(repo,user) {
     //const {loading, error, data} = useQuery(GET_USERS,{
-    console.log("Repositorio ",repo);
-    console.log("Usuario ",user);
-    //var repo1 = repo.navigation.state.params.repo;
-    //var user1 = repo.navigation.state.params.user;
+    var repo1 = repo.navigation.state.params.repo;
+    var user1 = repo.navigation.state.params.user;
+    console.log("Repositorio ->",repo1);
+    console.log("Usuario ->",user1);
 
     const {loading, error, data} = client.query(GET_USERS,{
-      variables: {repo:"GatosyPerros", user:"Kath17"},
+      variables: {repo:repo1, user:user1},
     }).then(data => console.log(data))
     .catch(error => console.error(error));
 

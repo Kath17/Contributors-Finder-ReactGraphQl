@@ -10,16 +10,21 @@ Mobile app that allows you to search github public repositories and view their t
 How to add a github api token:
 
 - Generate a token from: [Generate your token](https://github.com/settings/tokens/new)
+- Replace your token on API_KEY in App.js and ListUsersFromRepo.js
 - Arquitecture:
 
-![Arquitecture of react native](https://github.com/Kath17/ReactGraphQl/blob/master/node_modules/images/react_native_arq.png)
+	- Arquitecture of react native
+	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/react_native_arq.png" width="70">
 
-![Arquitecture of Apollo Client using GraphQl](https://github.com/Kath17/ReactGraphQl/blob/master/node_modules/images/apollo_graphql.png)
+	- Arquitecture of Apollo Client using GraphQl
+	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/apollo_graphql.png" width="70">
 
 - Screens:
 
-![Repositories](https://github.com/Kath17/ReactGraphQl/blob/master/node_modules/images/Repositories.jpg)
+	- Repositories
+	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/Repositories.jpg" width="40">
 
-![Collaborators of repository](https://github.com/Kath17/ReactGraphQl/blob/master/node_modules/images/Collaborators.jpg)
+	- Collaborators of repository
+	<img src="https://github.com/Kath17/ReactGraphQl/blob/master/images/Collaborators.jpg" width="40">
 
 
